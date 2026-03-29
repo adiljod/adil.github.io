@@ -78,6 +78,7 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       transition: color 0.3s;
+      cursor: pointer;
     }
 
     nav a:hover { color: var(--accent); }
@@ -442,10 +443,10 @@
 <nav>
   <div class="logo">Portfolio.</div>
   <ul>
-    <li><a href="#hero">Home</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a onclick="document.getElementById('hero').scrollIntoView({behavior:'smooth'})">Home</a></li>
+    <li><a onclick="document.getElementById('skills').scrollIntoView({behavior:'smooth'})">Skills</a></li>
+    <li><a onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">Projects</a></li>
+    <li><a onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contact</a></li>
   </ul>
 </nav>
 
@@ -461,8 +462,8 @@
         16 saal ka hungry hustler — Video Editing, Graphic Design, Trading, AI Tools, aur Web Development mein haath aazma chuka hoon. Seekhna kabhi nahi rukta! 🚀
       </p>
       <div class="hero-btns">
-        <a href="#projects" class="btn-primary">View Projects →</a>
-        <a href="#contact" class="btn-outline">Get in Touch</a>
+        <a onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})" class="btn-primary">View Projects →</a>
+        <a onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})" class="btn-outline">Get in Touch</a>
       </div>
       <div class="stats">
         <div class="stat"><h3>16</h3><p>Saal Ki Umra</p></div>
