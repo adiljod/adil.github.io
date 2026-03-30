@@ -498,6 +498,18 @@
         Hi, I'm <br/><span>Adil</span>
       </h1>
       <div class="typing-wrap">I am a <span id="typing-text" class="typing-span"></span><span class="cursor-blink">|</span></div>
+      <script>
+        var _tw = ['Video Editor','Graphic Designer','Trader','AI Enthusiast','Web Developer'];
+        var _wi=0,_ci=0,_del=false;
+        function _type(){
+          var el=document.getElementById('typing-text');
+          if(!el){setTimeout(_type,100);return;}
+          var w=_tw[_wi];
+          if(!_del){_ci++;el.textContent=w.slice(0,_ci);if(_ci===w.length){_del=true;setTimeout(_type,1500);return;}setTimeout(_type,120);}
+          else{_ci--;el.textContent=w.slice(0,_ci);if(_ci===0){_del=false;_wi=(_wi+1)%_tw.length;}setTimeout(_type,60);}
+        }
+        setTimeout(_type,800);
+      </script>
       <p class="hero-desc">
         A 16-year-old hungry hustler with hands-on experience in Video Editing, Graphic Design, Trading, AI Tools, and Web Development. Never stop learning! 🚀
       </p>
