@@ -624,7 +624,7 @@
         <p>Koi project hai ya collaboration chahte ho? Mujhe message karo — main 24 ghante mein reply karta hoon.</p>
         <div class="contact-links">
           <a href="javascript:void(0)" onclick="window.location='mai'+'lto:yadilali80'+'@'+'gmail.com'" class="contact-link">
-            <span>📧</span><span>yadilali80@gmail.com</span>
+            <span>📧</span><span><span class="__cf_email__" data-cfemail="c8b1a9aca1a4a9a4a1f0f888afa5a9a1a4e6aba7a5">[email&#160;protected]</span></span>
           </a>
           <a href="https://wa.me/919155605379" target="_blank" class="contact-link">
             <span>📱</span><span>+91 9155605379</span>
@@ -635,19 +635,21 @@
         </div>
       </div>
       <div class="contact-form reveal">
+        <form action="https://formspree.io/f/mzdkrbva" method="POST">
         <div class="form-group">
           <label>NAAM</label>
-          <input type="text" placeholder="Tumhara naam" />
+          <input type="text" name="name" placeholder="Tumhara naam" required />
         </div>
         <div class="form-group">
           <label>EMAIL</label>
-          <input type="email" placeholder="tumhara@email.com" />
+          <input type="email" name="email" placeholder="tumhara@email.com" required />
         </div>
         <div class="form-group">
           <label>MESSAGE</label>
-          <textarea placeholder="Apna project describe karo..."></textarea>
+          <textarea name="message" placeholder="Apna project describe karo..."></textarea>
         </div>
-        <button class="btn-send" onclick="this.textContent='Sent! ✓'">Send Message</button>
+        <button type="submit" class="btn-send">Send Message</button>
+        </form>
       </div>
     </div>
   </div>
@@ -664,7 +666,7 @@
   <p>Made with ❤️ by Adil &nbsp;·&nbsp; © 2026</p>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Typing animation
   const words = ['Video Editor', 'Graphic Designer', 'Trader', 'AI Enthusiast', 'Web Developer'];
   let wi = 0, ci = 0, deleting = false;
@@ -716,10 +718,4 @@
   // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver(entries => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 80);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12 }
+    entries.forEach((en
