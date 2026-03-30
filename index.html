@@ -422,7 +422,46 @@
 
     .reveal.visible { opacity: 1; transform: none; }
 
-    /* ── Responsive ── */
+    /* ── Typing animation ── */
+    .typing-wrap {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-top: 0.8rem;
+      margin-bottom: 0.5rem;
+      min-height: 1.8rem;
+    }
+    .typing-span { color: var(--accent); font-weight: 500; }
+    .cursor-blink {
+      color: var(--accent);
+      animation: blink 0.7s infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    /* ── WhatsApp floating button ── */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 2rem; right: 2rem;
+      width: 58px; height: 58px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      z-index: 998;
+      text-decoration: none;
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: pulse-wa 2s infinite;
+    }
+    .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.6); }
+    @keyframes pulse-wa {
+      0%,100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); }
+      50% { box-shadow: 0 4px 30px rgba(37,211,102,0.7); }
+    }
+
+    /* ── Counter ── */
+    .stat h3 { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--accent); }
+
+
     @media (max-width: 768px) {
       nav { padding: 1rem 1.5rem; }
       nav ul { display: none; }
@@ -458,17 +497,18 @@
       <h1 class="hero-title">
         Hi, I'm <br/><span>Adil</span>
       </h1>
+      <div class="typing-wrap">I am a <span id="typing-text" class="typing-span"></span><span class="cursor-blink">|</span></div>
       <p class="hero-desc">
-        16 saal ka hungry hustler — Video Editing, Graphic Design, Trading, AI Tools, aur Web Development mein haath aazma chuka hoon. Seekhna kabhi nahi rukta! 🚀
+        A 16-year-old hungry hustler with hands-on experience in Video Editing, Graphic Design, Trading, AI Tools, and Web Development. Never stop learning! 🚀
       </p>
       <div class="hero-btns">
         <a onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})" class="btn-primary">View Projects →</a>
         <a onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})" class="btn-outline">Get in Touch</a>
       </div>
       <div class="stats">
-        <div class="stat"><h3>16</h3><p>Saal Ki Umra</p></div>
-        <div class="stat"><h3>1.5yr</h3><p>Trading Exp.</p></div>
-        <div class="stat"><h3>7+</h3><p>Skills Seekhi</p></div>
+        <div class="stat"><h3 class="counter" data-target="16">0</h3><p>Years Old</p></div>
+        <div class="stat"><h3 class="counter" data-target="18">0</h3><p>Months Trading</p></div>
+        <div class="stat"><h3 class="counter" data-target="7">0</h3><p>Skills Learned</p></div>
       </div>
     </div>
     <div class="hero-visual">
@@ -571,8 +611,8 @@
       <div class="contact-info reveal">
         <p>Koi project hai ya collaboration chahte ho? Mujhe message karo — main 24 ghante mein reply karta hoon.</p>
         <div class="contact-links">
-          <a href="mailto:yadilali80@gmail.com" class="contact-link">
-            <span>📧</span><span>yadilali80@gmail.com</span>
+          <a href="/cdn-cgi/l/email-protection#cab3abaea3a6aba6a3f2fa8aada7aba3a6e4a9a5a7" class="contact-link">
+            <span>📧</span><span><span class="__cf_email__" data-cfemail="037a62676a6f626f6a3b3343646e626a6f2d606c6e">[email&#160;protected]</span></span>
           </a>
           <a href="https://wa.me/919155605379" target="_blank" class="contact-link">
             <span>📱</span><span>+91 9155605379</span>
@@ -601,11 +641,51 @@
   </div>
 </section>
 
+<!-- WhatsApp Float -->
+<a href="https://wa.me/919155605379" target="_blank" class="whatsapp-float">📱</a>
+
 <footer>
   <p>Made with ❤️ by Adil &nbsp;·&nbsp; © 2026</p>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Typing animation
+  const words = ['Video Editor', 'Graphic Designer', 'Trader 📈', 'AI Enthusiast 🤖', 'Web Developer 💻'];
+  let wi = 0, ci = 0, deleting = false;
+  const typingEl = document.getElementById('typing-text');
+  function type() {
+    const word = words[wi];
+    if (!deleting) {
+      typingEl.textContent = word.slice(0, ++ci);
+      if (ci === word.length) { deleting = true; setTimeout(type, 1200); return; }
+    } else {
+      typingEl.textContent = word.slice(0, --ci);
+      if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; }
+    }
+    setTimeout(type, deleting ? 60 : 100);
+  }
+  type();
+
+  // Counter animation
+  const counters = document.querySelectorAll('.counter');
+  const counterObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = +el.dataset.target;
+        let count = 0;
+        const step = Math.ceil(target / 40);
+        const timer = setInterval(() => {
+          count = Math.min(count + step, target);
+          el.textContent = count + '+';
+          if (count >= target) clearInterval(timer);
+        }, 40);
+        counterObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(c => counterObserver.observe(c));
+
   // Cursor glow
   const glow = document.getElementById('glow');
   document.addEventListener('mousemove', e => {
@@ -622,11 +702,4 @@
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12 });
-  reveals.forEach(el => observer.observe(el));
-
-  // Skill bars
-  const bars = document.querySelectorAll('.skill-bar');
-  const barObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting)
+  }, { threshold: 0.12 }
